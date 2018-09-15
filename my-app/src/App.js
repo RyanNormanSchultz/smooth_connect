@@ -78,11 +78,45 @@ class InputChat extends Component {
   }
 }
 
+class ThreadController extends Component {
+  constructor(props){
+    super(props);
+    this.state = {thread: 0};
+
+    this.handleThreadChangeLeft = this.handleThreadChangeLeft.bind(this);
+    this.handleThreadChangeRight = this.handleThreadChangeRight.bind(this);
+  }
+
+  handleThreadChangeLeft(event){
+    this.setState({thread: this.state.thread + 1})
+  }
+
+  handleThreadChangeRight(event){
+    this.setState({thread: this.state.thread - 1})
+  }
+
+
+  render() {
+    return(
+      <div>
+        <p> Thread {this.state.thread} </p>
+        <button onClick={this.handleThreadChangeLeft}>
+          Thread+
+        </button>
+        <button onClick={this.handleThreadChangeRight}>
+          Thread-
+        </button>
+        <InputChat chatHistory={CHAT_LOG} thread={this.state.thread}/>
+      </div>
+    );
+  }
+}
+
   const CHAT_LOG = [
-    {content: 'Hey Ben!', type: 'self'},
-    {content: 'Hey Ryan!', type: 'friend'},
-    {content: 'How is it going?', type: 'self'},
-    {content: 'Well thanks, hbu?', type: 'friend'}
+    {content: 'Hey Ben!', type: 'self', thread: '0'},
+    {content: 'Hey Ryan!', type: 'friend', thread:'0'},
+    {content: 'How is it going?', type: 'self', thread:'0'},
+    {content: 'Well thanks, hbu?', type: 'friend', thread:'0'}
   ];
 
 class App extends Component {
@@ -97,7 +131,7 @@ class App extends Component {
         <p className="App-intro">
           Hello world
         </p>
-        <InputChat chatHistory={CHAT_LOG}/>
+        <ThreadController />
       </div>
     );
   }
