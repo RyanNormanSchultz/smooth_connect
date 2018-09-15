@@ -18,7 +18,7 @@ p {
 }
 
 .App-Container{
-  width: 400px;
+  width: 800px;
   height: 600px;
   background-color: #D9D9D9;
   border-radius: 5px;
@@ -46,6 +46,11 @@ p {
   overflow-y: scroll;
 }
 
+
+.Thread-Col {
+  max-width: 200px;
+  width: 200px;
+}
 .Self-message {
   background: rgba(50, 67, 89, 0.8);
   color: white;
@@ -109,8 +114,8 @@ input[type="text"] {
   transition: all 0.3s ease;
 }
 
-.chatroom .input input[type="submit"]:hover {
-  background: #1EE494;
+ input[type="submit"]:hover {
+  background: #707F8C;
   color: #FFF;
 }
 
