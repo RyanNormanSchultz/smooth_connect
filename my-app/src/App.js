@@ -42,7 +42,7 @@ class ChatView extends Component {
 class InputChat extends Component {
   constructor(props){
     super(props);
-    this.state = {value: '', messages:{content: 'Hey Ben',type:'self'}};
+    this.state = {value: '', messages:[{content: 'Hey Ben',type:'self'}]};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,7 +54,7 @@ class InputChat extends Component {
 
   handleSubmit(event) {
     this.setState({
-      messages: this.state.messages.push({content:this.state.value, type:'self'})
+      messages: this.state.messages.concat([{content:this.state.value, type:'self'}])
     });
     event.preventDefault();
   }
@@ -62,7 +62,7 @@ class InputChat extends Component {
     render() {
     return (
       <div>
-        <ChatView messages={CHAT_LOG} />
+        <ChatView messages={this.state.messages} />
         <form onSubmit={this.handleSubmit}>
           <label>
             Message:
