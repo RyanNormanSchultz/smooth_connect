@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import logo from './logo.svg';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 import './App.css';
 
 class ChatMessage extends Component {
@@ -91,13 +92,14 @@ class ThreadController extends Component {
   }
 
   handleThreadChangeLeft(event){
-    this.setState({thread: this.state.thread + 1})
+      this.setState({thread: this.state.thread + 1})
   }
 
   handleThreadChangeRight(event){
-    this.setState({thread: this.state.thread - 1})
+    if(this.state.thread > 0 ){
+      this.setState({thread: this.state.thread - 1})
+    }
   }
-
 
   render() {
     return(
@@ -109,6 +111,12 @@ class ThreadController extends Component {
         <button onClick={this.handleThreadChangeRight}>
           Thread-
         </button>
+        <KeyboardEventHandler 
+          handleKeys={['right']}
+          onKeyEvent={(key,e) => this.handleThreadChangeLeft(e)}/>
+        <KeyboardEventHandler 
+          handleKeys={['left']}
+          onKeyEvent={(key,e) => this.handleThreadChangeRight(e)}/>
         <InputChat chatHistory={CHAT_LOG} thread={this.state.thread}/>
       </div>
     );
