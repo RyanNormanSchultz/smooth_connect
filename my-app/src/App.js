@@ -48,7 +48,7 @@ class ChatView extends Component {
 class InputChat extends Component {
   constructor(props){
     super(props);
-    this.state = {value: '', messages:props.chatHistory, thread: 0};
+    this.state = {value: '', messages:props.chatHistory, thread: 0, active_threads: 0};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -64,6 +64,7 @@ class InputChat extends Component {
     var thread = this.myRef.current.state.current_thread;
     if(regex_new_thread.test(this.state.value)){
       thread = thread+1;
+      this.setState({active_threads: this.state.active_threads + 1});
     } 
     const new_message = [{content:this.state.value, type:'self', thread:thread}];
     this.setState({
@@ -77,7 +78,7 @@ class InputChat extends Component {
     render() {
     return (
       <div>
-        <ThreadController messages={this.state.messages} ref={this.myRef}/>
+        <ThreadController messages={this.state.messages} ref={this.myRef} active_threads={this.state.active_threads}/>
         <form onSubmit={this.handleSubmit}>
           <label>
             <input type="text" value={this.state.value} onChange={this.handleChange} ref="msg"/>
@@ -92,14 +93,16 @@ class InputChat extends Component {
 class ThreadController extends Component {
   constructor(props){
     super(props);
-    this.state = {active_threads: 0, current_thread: 0};
+    this.state = {current_thread: 0};
 
     this.handleThreadChangeLeft = this.handleThreadChangeLeft.bind(this);
     this.handleThreadChangeRight = this.handleThreadChangeRight.bind(this);
   }
 
   handleThreadChangeLeft(event){
-      this.setState({current_thread: this.state.current_thread + 1})
+      if(this.state.current_thread < this.props.active_threads){
+        this.setState({current_thread: this.state.current_thread + 1})
+      }
   }
 
   handleThreadChangeRight(event){
@@ -111,7 +114,7 @@ class ThreadController extends Component {
   render() {
     return(
       <div >
-        <p> Thread: {this.state.current_thread}, Active Threads: {this.state.active_threads} </p>
+        <p> Thread: {this.state.current_thread}, Active Threads: {this.props.active_threads} </p>
         <button onClick={this.handleThreadChangeLeft}>
           Thread+
         </button>
