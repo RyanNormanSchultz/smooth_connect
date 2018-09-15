@@ -34,9 +34,11 @@ class ChatView extends Component {
     });
 
     return(
-      <table className="Chat-Table">
-        <tbody>{rows}</tbody>
-      </table>
+      <div className="Chat-Container">
+        <table className="Chat-Table">
+          <tbody>{rows}</tbody>
+        </table>
+      </div>
     );
   }
 }
@@ -99,7 +101,7 @@ class ThreadController extends Component {
 
   render() {
     return(
-      <div>
+      <div >
         <p> Thread {this.state.thread} </p>
         <button onClick={this.handleThreadChangeLeft}>
           Thread+
@@ -128,7 +130,7 @@ class App extends Component {
           <h1 className="App-title">
             Smooth Connect
           </h1>
-          <ThreadController className="Chat-Container"/>
+          <ThreadController />
         </div>
       </div>
     );
