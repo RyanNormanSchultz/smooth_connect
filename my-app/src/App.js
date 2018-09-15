@@ -41,7 +41,7 @@ class ChatView extends Component {
       calc_display='table-cell';
     }
     var calc_border = '0px solid black';
-    if(this.props.thread == this.props.active_threads && this.props.active_threads > 0) { //apply a active (so you know what lane)
+    if(this.props.thread == this.props.current_thread && this.props.active_threads > 0) { //apply a active (so you know what lane)
       calc_border = '5px solid #707F8C';
     }
     const tdStyle = {
@@ -67,9 +67,9 @@ class ThreadView extends Component {
           <table className="Chat-Table">
             <tbody>
               <tr>        
-               <ChatView messages={this.props.messages} thread={0} active_threads={this.props.active_threads}/>
-               <ChatView messages={this.props.messages} thread={1} active_threads={this.props.active_threads}/>
-               <ChatView messages={this.props.messages} thread={2} active_threads={this.props.active_threads}/>
+               <ChatView messages={this.props.messages} thread={0} active_threads={this.props.active_threads} current_thread={this.props.current_thread}/>
+               <ChatView messages={this.props.messages} thread={1} active_threads={this.props.active_threads} current_thread={this.props.current_thread}/>
+               <ChatView messages={this.props.messages} thread={2} active_threads={this.props.active_threads} current_thread={this.props.current_thread}/>
                </tr>
             </tbody>
           </table>
@@ -122,7 +122,7 @@ class InputChat extends Component {
             Smooth Connect
           </h1>
         <div>
-          <ThreadController messages={this.state.messages} ref={this.myRef} active_threads={this.state.active_threads}/>
+          <ThreadController messages={this.state.messages} ref={this.myRef} active_threads={this.state.active_threads} />
           <form onSubmit={this.handleSubmit}>
             <label>
               <input type="text" value={this.state.value} onChange={this.handleChange} ref="msg"/>
@@ -172,7 +172,7 @@ class ThreadController extends Component {
         <KeyboardEventHandler 
           handleKeys={['left']}
           onKeyEvent={(key,e) => this.handleThreadChangeRight(e)}/>
-        <ThreadView messages={this.props.messages} active_threads={this.props.active_threads}/>
+        <ThreadView messages={this.props.messages} active_threads={this.props.active_threads} current_thread={this.state.current_thread}/>
       </div>
     );
   }
