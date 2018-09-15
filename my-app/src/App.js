@@ -35,11 +35,19 @@ class ChatView extends Component {
     });
 
     var calc_width=0;
+    var calc_display='none';
     if(this.props.active_threads <= this.props.thread){
       calc_width=100/(this.props.active_threads+1) + "%";
+      calc_display='flex';
     }
+    const tdStyle = {
+      width: calc_width,
+    };
+    const tableStyle = {
+        display: calc_display,
+    };
     return(
-          <td className="Thread-Col" style={{width:calc_width}}>
+          <td className="Thread-Col" style={tdStyle}>
             <table className="Chat-Table">
               <tbody>{rows}</tbody>
             </table>
@@ -50,13 +58,6 @@ class ChatView extends Component {
 
 class ThreadView extends Component {
   render() {
-    const threads_required = [];
-    for(var i=0; i<=this.props.active_threads; i++){
-      threads_required.push(i);
-    }
-    var react_chats = threads_required.map(function(thread, index){
-                    return <ChatView messages={this.props.messages} thread={thread} key={index}/>;
-                  })
     return(
         <div className="Chat-Container">
           <table className="Chat-Table">
@@ -65,7 +66,6 @@ class ThreadView extends Component {
                <ChatView messages={this.props.messages} thread={0} active_threads={this.props.active_threads}/>
                <ChatView messages={this.props.messages} thread={1} active_threads={this.props.active_threads}/>
                <ChatView messages={this.props.messages} thread={2} active_threads={this.props.active_threads}/>
-               <ChatView messages={this.props.messages} thread={3} active_threads={this.props.active_threads}/>
                </tr>
             </tbody>
           </table>
@@ -168,7 +168,7 @@ class ThreadController extends Component {
         <KeyboardEventHandler 
           handleKeys={['left']}
           onKeyEvent={(key,e) => this.handleThreadChangeRight(e)}/>
-        <ThreadView messages={this.props.messages} active_threads={this.props.active_thread}/>
+        <ThreadView messages={this.props.messages} active_threads={this.props.active_threads}/>
       </div>
     );
   }
