@@ -36,16 +36,15 @@ class ChatView extends Component {
 
     var calc_width=0;
     var calc_display='none';
-    if(this.props.active_threads <= this.props.thread){
+    if(this.props.thread <= this.props.active_threads) {
       calc_width=100/(this.props.active_threads+1) + "%";
-      calc_display='flex';
+      calc_display='table-cell';
     }
     const tdStyle = {
       width: calc_width,
+      display: calc_display,
     };
-    const tableStyle = {
-        display: calc_display,
-    };
+
     return(
           <td className="Thread-Col" style={tdStyle}>
             <table className="Chat-Table">
