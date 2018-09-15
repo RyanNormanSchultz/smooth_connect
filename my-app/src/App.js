@@ -9,7 +9,7 @@ class ChatMessage extends Component {
     const type = (this.props.type === "self") ? "Self-message" : "Friend-message";
     return(
         <tr>
-          <td className={type}> {message} </td>
+          <td className={type} > {message} </td>
         </tr>
     );
   }
@@ -34,7 +34,7 @@ class ChatView extends Component {
     });
 
     return(
-      <table className="Chat-view">
+      <table className="Chat-Table">
         <tbody>{rows}</tbody>
       </table>
     );
@@ -70,7 +70,6 @@ class InputChat extends Component {
         <ChatView messages={this.state.messages} thread={this.props.thread}/>
         <form onSubmit={this.handleSubmit}>
           <label>
-            Message:
             <input type="text" value={this.state.value} onChange={this.handleChange} ref="msg"/>
           </label>
           <input type="submit" value="Submit" />
@@ -125,15 +124,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        <div className="App-Container">
           <h1 className="App-title">
             Smooth Connect
           </h1>
-        </header>
-        <p className="App-intro">
-          Hello world
-        </p>
-        <ThreadController />
+          <ThreadController className="Chat-Container"/>
+        </div>
       </div>
     );
   }
