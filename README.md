@@ -1,6 +1,6 @@
 # smooth_connect
 
-** Using threads to better organize text communication by semantics and time **
+**Using threads to better organize text communication by semantics and time**
 
 People text message a lot these days. For most people it’s their preferred mode of communication. Yet it's not perfect. Not even close.
 
