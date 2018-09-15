@@ -57,7 +57,7 @@ class InputChat extends Component {
 
   handleSubmit(event) {
     this.setState({
-      messages: this.state.messages.concat([{content:this.state.value, type:'self', thread:this.props.thread}])
+      messages: this.state.messages.concat([{content:this.state.value, type:'self', thread:this.props.thread}]),value:''
     }, () => {
       ReactDOM.findDOMNode(this.refs.msg).value ="";
     });
