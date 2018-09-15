@@ -60,8 +60,14 @@ class InputChat extends Component {
   }
 
   handleSubmit(event) {
+    var regex_new_thread = /\?\?/;
+    var thread = this.myRef.current.state.current_thread;
+    if(regex_new_thread.test(this.state.value)){
+      thread = thread+1;
+    } 
+    const new_message = [{content:this.state.value, type:'self', thread:thread}];
     this.setState({
-      messages: this.state.messages.concat([{content:this.state.value, type:'self', thread:this.myRef.current.state.current_thread}]),value:''
+      messages: this.state.messages.concat(new_message),value:''
     }, () => {
       ReactDOM.findDOMNode(this.refs.msg).value ="";
     });
