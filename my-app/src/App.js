@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
 
@@ -55,6 +56,8 @@ class InputChat extends Component {
   handleSubmit(event) {
     this.setState({
       messages: this.state.messages.concat([{content:this.state.value, type:'self'}])
+    }, () => {
+      ReactDOM.findDOMNode(this.refs.msg).value ="";
     });
     event.preventDefault();
   }
@@ -66,7 +69,7 @@ class InputChat extends Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Message:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <input type="text" value={this.state.value} onChange={this.handleChange} ref="msg"/>
           </label>
           <input type="submit" value="Submit" />
         </form>
