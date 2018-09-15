@@ -58,7 +58,7 @@ class ThreadView extends Component {
           <table className="Chat-Table">
             <tbody>
               <tr>        
-               <ChatView messages={this.props.messages} thread={0}/>
+               <ChatView messages={this.props.messages} thread={0} active_threads={this.props.active_threads}/>
                <ChatView messages={this.props.messages} thread={1}/>
                <ChatView messages={this.props.messages} thread={2}/>
                <ChatView messages={this.props.messages} thread={3}/>
@@ -99,17 +99,23 @@ class InputChat extends Component {
     });
     event.preventDefault();
   }
-
     render() {
+      var width_size = 400 + 150*(this.state.active_threads) + 'px';
+
     return (
-      <div>
-        <ThreadController messages={this.state.messages} ref={this.myRef} active_threads={this.state.active_threads}/>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <input type="text" value={this.state.value} onChange={this.handleChange} ref="msg"/>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+      <div className="App-Container" style={{width:width_size}}>
+          <h1 className="App-title">
+            Smooth Connect
+          </h1>
+        <div>
+          <ThreadController messages={this.state.messages} ref={this.myRef} active_threads={this.state.active_threads}/>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              <input type="text" value={this.state.value} onChange={this.handleChange} ref="msg"/>
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
       </div>
     );
   }
@@ -158,14 +164,6 @@ class ThreadController extends Component {
   }
 }
 
-class ChatContainer extends Component {
-  render() {
-    return(
-        <InputChat chatHistory={CHAT_LOG} />
-      );
-  }
-}
-
   const CHAT_LOG = [
     {content: 'Hey Ben!', type: 'self', thread: '0'},
     {content: 'Hey Ryan!', type: 'friend', thread:'0'},
@@ -177,12 +175,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-Container">
-          <h1 className="App-title">
-            Smooth Connect
-          </h1>
-          <ChatContainer />
-        </div>
+          <InputChat chatHistory={CHAT_LOG} />
       </div>
     );
   }

@@ -23,6 +23,7 @@ p {
   background-color: #D9D9D9;
   border-radius: 5px;
   overflow: hidden;
+  transition: all 1s ease;
 }
 
 .App-title {
