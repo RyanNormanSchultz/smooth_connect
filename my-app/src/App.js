@@ -21,12 +21,6 @@ class ChatView extends Component {
     const rows = [];
     let lastMessage = null;
 
-//   this.props.messages.forEach((message) => { //hacky solution to threads
- //     if(message.thread === null){
-  //     message.thread = this.props.thread;
-   //   }
-  // });
-
     this.props.messages.forEach((message) => {
       if (message.content !== lastMessage){
         if(message.thread == this.props.thread){
@@ -58,6 +52,7 @@ class InputChat extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.myRef = React.createRef();
   }
 
   handleChange(event) {
@@ -66,7 +61,7 @@ class InputChat extends Component {
 
   handleSubmit(event) {
     this.setState({
-      messages: this.state.messages.concat([{content:this.state.value, type:'self', thread:0}]),value:''
+      messages: this.state.messages.concat([{content:this.state.value, type:'self', thread:this.myRef.current.state.current_thread}]),value:''
     }, () => {
       ReactDOM.findDOMNode(this.refs.msg).value ="";
     });
@@ -76,7 +71,7 @@ class InputChat extends Component {
     render() {
     return (
       <div>
-        <ThreadController messages={this.state.messages} />
+        <ThreadController messages={this.state.messages} ref={this.myRef}/>
         <form onSubmit={this.handleSubmit}>
           <label>
             <input type="text" value={this.state.value} onChange={this.handleChange} ref="msg"/>
