@@ -85,26 +85,26 @@ class InputChat extends Component {
 class ThreadController extends Component {
   constructor(props){
     super(props);
-    this.state = {thread: 0};
+    this.state = {active_threads: 0, current_thread: 0};
 
     this.handleThreadChangeLeft = this.handleThreadChangeLeft.bind(this);
     this.handleThreadChangeRight = this.handleThreadChangeRight.bind(this);
   }
 
   handleThreadChangeLeft(event){
-      this.setState({thread: this.state.thread + 1})
+      this.setState({current_thread: this.state.current_thread + 1})
   }
 
   handleThreadChangeRight(event){
-    if(this.state.thread > 0 ){
-      this.setState({thread: this.state.thread - 1})
+    if(this.state.current_thread > 0 ){
+      this.setState({current_thread: this.state.current_thread - 1})
     }
   }
 
   render() {
     return(
       <div >
-        <p> Thread {this.state.thread} </p>
+        <p> Thread: {this.state.current_thread}, Active Threads: {this.state.active_threads} </p>
         <button onClick={this.handleThreadChangeLeft}>
           Thread+
         </button>
@@ -117,9 +117,21 @@ class ThreadController extends Component {
         <KeyboardEventHandler 
           handleKeys={['left']}
           onKeyEvent={(key,e) => this.handleThreadChangeRight(e)}/>
-        <InputChat chatHistory={CHAT_LOG} thread={this.state.thread}/>
+        <InputChat chatHistory={CHAT_LOG} thread={this.state.current_thread}/>
       </div>
     );
+  }
+}
+
+class ThreadInterpreter extends Component {
+  constructor(props){
+    super(props);
+    this.state = {active_threads: 1}
+  }
+  render() {
+    return(
+        <ThreadController />
+      );
   }
 }
 
@@ -138,7 +150,7 @@ class App extends Component {
           <h1 className="App-title">
             Smooth Connect
           </h1>
-          <ThreadController />
+          <ThreadInterpreter />
         </div>
       </div>
     );
