@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import logo from './logo.svg';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import './App.css';
 

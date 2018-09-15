@@ -92,7 +92,7 @@ p {
 input[type="text"] {
   background: rgba(255, 255, 255, 0.5);
   outline: 0;
-  border: 2px solid black;
+  border: 2px solid #707F8C;
   padding: 0 5px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -105,7 +105,7 @@ input[type="text"] {
 
  input[type="submit"] {
   background: transparent;
-  border: 1px solid black;
+  border: 1px solid #707F8C;
   height: 30px;
   width: 70px;
   font-size: 14px;
