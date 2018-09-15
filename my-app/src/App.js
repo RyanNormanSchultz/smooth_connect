@@ -21,6 +21,12 @@ class ChatView extends Component {
     const rows = [];
     let lastMessage = null;
 
+//   this.props.messages.forEach((message) => { //hacky solution to threads
+ //     if(message.thread === null){
+  //     message.thread = this.props.thread;
+   //   }
+  // });
+
     this.props.messages.forEach((message) => {
       if (message.content !== lastMessage){
         if(message.thread == this.props.thread){
@@ -48,7 +54,7 @@ class ChatView extends Component {
 class InputChat extends Component {
   constructor(props){
     super(props);
-    this.state = {value: '', messages:props.chatHistory};
+    this.state = {value: '', messages:props.chatHistory, thread: 0};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -60,7 +66,7 @@ class InputChat extends Component {
 
   handleSubmit(event) {
     this.setState({
-      messages: this.state.messages.concat([{content:this.state.value, type:'self', thread:this.props.thread}]),value:''
+      messages: this.state.messages.concat([{content:this.state.value, type:'self', thread:0}]),value:''
     }, () => {
       ReactDOM.findDOMNode(this.refs.msg).value ="";
     });
@@ -70,7 +76,7 @@ class InputChat extends Component {
     render() {
     return (
       <div>
-        <ChatView messages={this.state.messages} thread={this.props.thread}/>
+        <ThreadController messages={this.state.messages} />
         <form onSubmit={this.handleSubmit}>
           <label>
             <input type="text" value={this.state.value} onChange={this.handleChange} ref="msg"/>
@@ -117,20 +123,16 @@ class ThreadController extends Component {
         <KeyboardEventHandler 
           handleKeys={['left']}
           onKeyEvent={(key,e) => this.handleThreadChangeRight(e)}/>
-        <InputChat chatHistory={CHAT_LOG} thread={this.state.current_thread}/>
+        <ChatView messages={this.props.messages} thread={this.state.current_thread}/>
       </div>
     );
   }
 }
 
-class ThreadInterpreter extends Component {
-  constructor(props){
-    super(props);
-    this.state = {active_threads: 1}
-  }
+class ChatContainer extends Component {
   render() {
     return(
-        <ThreadController />
+        <InputChat chatHistory={CHAT_LOG} />
       );
   }
 }
@@ -150,7 +152,7 @@ class App extends Component {
           <h1 className="App-title">
             Smooth Connect
           </h1>
-          <ThreadInterpreter />
+          <ChatContainer />
         </div>
       </div>
     );
