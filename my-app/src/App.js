@@ -38,12 +38,49 @@ class ChatView extends Component {
   }
 }
 
-const CHAT_LOG = [
-  {content: 'Hey Ben!', type: 'self'},
-  {content: 'Hey Ryan!', type: 'friend'},
-  {content: 'How is it going?', type: 'self'},
-  {content: 'Well thanks, hbu?', type: 'friend'}
-];
+
+class InputChat extends Component {
+  constructor(props){
+    super(props);
+    this.state = {value: '', messages:{content: 'Hey Ben',type:'self'}};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    this.setState({
+      messages: this.state.messages.push({content:this.state.value, type:'self'})
+    });
+    event.preventDefault();
+  }
+
+    render() {
+    return (
+      <div>
+        <ChatView messages={CHAT_LOG} />
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Message:
+            <input type="text" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    );
+  }
+}
+
+  const CHAT_LOG = [
+    {content: 'Hey Ben!', type: 'self'},
+    {content: 'Hey Ryan!', type: 'friend'},
+    {content: 'How is it going?', type: 'self'},
+    {content: 'Well thanks, hbu?', type: 'friend'}
+  ];
 
 class App extends Component {
   render() {
@@ -57,7 +94,7 @@ class App extends Component {
         <p className="App-intro">
           Hello world
         </p>
-        <ChatView messages={CHAT_LOG} />
+        <InputChat />
       </div>
     );
   }
