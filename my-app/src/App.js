@@ -34,9 +34,13 @@ class ChatView extends Component {
       }
     });
 
+    var calc_width=0;
+    if(this.props.active_threads <= this.props.thread){
+      calc_width=100/(this.props.active_threads+1) + "%";
+    }
     return(
-          <td className="Thread-Col">
-            <table>
+          <td className="Thread-Col" style={{width:calc_width}}>
+            <table className="Chat-Table">
               <tbody>{rows}</tbody>
             </table>
           </td>
@@ -59,9 +63,9 @@ class ThreadView extends Component {
             <tbody>
               <tr>        
                <ChatView messages={this.props.messages} thread={0} active_threads={this.props.active_threads}/>
-               <ChatView messages={this.props.messages} thread={1}/>
-               <ChatView messages={this.props.messages} thread={2}/>
-               <ChatView messages={this.props.messages} thread={3}/>
+               <ChatView messages={this.props.messages} thread={1} active_threads={this.props.active_threads}/>
+               <ChatView messages={this.props.messages} thread={2} active_threads={this.props.active_threads}/>
+               <ChatView messages={this.props.messages} thread={3} active_threads={this.props.active_threads}/>
                </tr>
             </tbody>
           </table>
@@ -73,7 +77,7 @@ class ThreadView extends Component {
 class InputChat extends Component {
   constructor(props){
     super(props);
-    this.state = {value: '', messages:props.chatHistory, thread: 0, active_threads: 0};
+    this.state = {value: '', messages:props.chatHistory, thread: 0, active_threads: 0, person: 'self'};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -90,8 +94,14 @@ class InputChat extends Component {
     if(regex_new_thread.test(this.state.value)){
       thread = this.state.active_threads+1;
       this.setState({active_threads: this.state.active_threads + 1});
-    } 
-    const new_message = [{content:this.state.value, type:'self', thread:thread}];
+    }
+
+    if(this.state.person === 'self'){ //just flip flop states for now
+      this.setState({person: 'friend'});
+    } else{
+      this.setState({person: 'self'});
+    }
+    const new_message = [{content:this.state.value, type:this.state.person, thread:thread}];
     this.setState({
       messages: this.state.messages.concat(new_message),value:''
     }, () => {
