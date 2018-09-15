@@ -42,7 +42,7 @@ class ChatView extends Component {
 class InputChat extends Component {
   constructor(props){
     super(props);
-    this.state = {value: '', messages:[{content: 'Hey Ben',type:'self'}]};
+    this.state = {value: '', messages:props.chatHistory};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -94,7 +94,7 @@ class App extends Component {
         <p className="App-intro">
           Hello world
         </p>
-        <InputChat />
+        <InputChat chatHistory={CHAT_LOG}/>
       </div>
     );
   }
