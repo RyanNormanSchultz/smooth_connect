@@ -50,6 +50,8 @@ p {
 
 .Thread-Col {
   width: 200px;
+    border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .Self-message {
   background: rgba(50, 67, 89, 0.8);

@@ -40,9 +40,14 @@ class ChatView extends Component {
       calc_width=100/(this.props.active_threads+1) + "%";
       calc_display='table-cell';
     }
+    var calc_border = '0px solid black';
+    if(this.props.thread == this.props.active_threads && this.props.active_threads > 0) { //apply a active (so you know what lane)
+      calc_border = '5px solid #707F8C';
+    }
     const tdStyle = {
       width: calc_width,
       display: calc_display,
+      border: calc_border,
     };
 
     return(
