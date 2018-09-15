@@ -161,16 +161,17 @@ class ThreadController extends Component {
     }
   }
 
-  render() {
-    return(
-      <div >
-        <p> Thread: {this.state.current_thread}, Active Threads: {this.props.active_threads} </p>
+  /*        <p> Thread: {this.state.current_thread}, Active Threads: {this.props.active_threads} </p>
         <button onClick={this.handleThreadChangeLeft}>
           Thread+
         </button>
         <button onClick={this.handleThreadChangeRight}>
           Thread-
         </button>
+        */
+  render() {
+    return(
+      <div >
         <KeyboardEventHandler 
           handleKeys={['right']}
           onKeyEvent={(key,e) => this.handleThreadChangeLeft(e)}/>
@@ -185,7 +186,7 @@ class ThreadController extends Component {
 
   const CHAT_LOG = [
     {content: 'Hey Ben!', type: 'self', thread: '0', visible:'1'},
-    {content: 'Hey Ryan!', type: 'friend', thread:'0', visible:'1'},
+    {content: 'Hi Ryan!', type: 'friend', thread:'0', visible:'1'},
     {content: 'How is it going?', type: 'self', thread:'0', visible:'1'},
     {content: 'Well thanks, hbu?', type: 'friend', thread:'0', visible:'1'}
   ];
