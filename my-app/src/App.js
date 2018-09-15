@@ -22,12 +22,14 @@ class ChatView extends Component {
 
     this.props.messages.forEach((message) => {
       if (message.content !== lastMessage){
-        rows.push(
-            <ChatMessage
-                message={message.content}
-                type={message.type} 
-                key={message.content} />
-          );
+        if(message.thread == this.props.thread){
+          rows.push(
+              <ChatMessage
+                  message={message.content}
+                  type={message.type} 
+                  key={message.content} />
+            );
+        }
       }
     });
 
@@ -55,7 +57,7 @@ class InputChat extends Component {
 
   handleSubmit(event) {
     this.setState({
-      messages: this.state.messages.concat([{content:this.state.value, type:'self'}])
+      messages: this.state.messages.concat([{content:this.state.value, type:'self', thread:this.props.thread}])
     }, () => {
       ReactDOM.findDOMNode(this.refs.msg).value ="";
     });
@@ -65,7 +67,7 @@ class InputChat extends Component {
     render() {
     return (
       <div>
-        <ChatView messages={this.state.messages} />
+        <ChatView messages={this.state.messages} thread={this.props.thread}/>
         <form onSubmit={this.handleSubmit}>
           <label>
             Message:
