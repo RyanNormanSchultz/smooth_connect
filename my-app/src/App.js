@@ -100,12 +100,17 @@ class InputChat extends Component {
       this.setState({active_threads: this.state.active_threads + 1});
     }
 
+    var regex_end_thread =/gotcha/;
+    if(regex_end_thread.test(this.state.value)){
+      this.setState({active_threads: this.state.active_threads - 1});
+    }
+
     if(this.state.person === 'self'){ //just flip flop states for now
       this.setState({person: 'friend'});
     } else{
       this.setState({person: 'self'});
     }
-    const new_message = [{content:this.state.value, type:this.state.person, thread:thread}];
+    const new_message = [{content:this.state.value, type:this.state.person, thread:thread, visible:1}];
     this.setState({
       messages: this.state.messages.concat(new_message),value:''
     }, () => {
@@ -179,10 +184,10 @@ class ThreadController extends Component {
 }
 
   const CHAT_LOG = [
-    {content: 'Hey Ben!', type: 'self', thread: '0'},
-    {content: 'Hey Ryan!', type: 'friend', thread:'0'},
-    {content: 'How is it going?', type: 'self', thread:'0'},
-    {content: 'Well thanks, hbu?', type: 'friend', thread:'0'}
+    {content: 'Hey Ben!', type: 'self', thread: '0', visible:'1'},
+    {content: 'Hey Ryan!', type: 'friend', thread:'0', visible:'1'},
+    {content: 'How is it going?', type: 'self', thread:'0', visible:'1'},
+    {content: 'Well thanks, hbu?', type: 'friend', thread:'0', visible:'1'}
   ];
 
 class App extends Component {
