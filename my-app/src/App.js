@@ -29,17 +29,18 @@ class ChatView extends Component {
   render() {
     const rows = [];
     let lastMessage = null;
-
+    var firstMessageFlag=1;
     this.props.messages.forEach((message) => {
       if (message.content !== lastMessage){
         if(message.thread == this.props.thread){
+          firstMessageFlag=0;
           rows.push(
               <ChatMessage
                   message={message.content}
                   type={message.type} 
                   key={message.content} />
             );
-        } else {
+        } else if(firstMessageFlag) {
           rows.push(
               <EmptyChatMessage
                   key={message.thread + message.content}/>
