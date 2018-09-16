@@ -57,7 +57,7 @@ class ChatView extends Component {
     }
     var calc_border = '0px solid black';
     if(this.props.thread == this.props.current_thread && this.props.active_threads > 0) { //apply a active (so you know what lane)
-      calc_border = '5px solid #707F8C';
+      calc_border = '3px solid #707F8C';
     }
     const tdStyle = {
       width: calc_width,
@@ -77,13 +77,20 @@ class ChatView extends Component {
 
 class ThreadView extends Component {
   render() {
+    const thread_whatis = this.props.active_threads;
     return(
         <div className="Chat-Container">
           <table className="Chat-Table">
             <tbody>
               <tr>        
                <ChatView messages={this.props.messages} thread={0} active_threads={this.props.active_threads} current_thread={this.props.current_thread}/>
+               {thread_whatis > 0 &&
+                <td className="Divider"> </td>
+               }
                <ChatView messages={this.props.messages} thread={1} active_threads={this.props.active_threads} current_thread={this.props.current_thread}/>
+                {thread_whatis > 1 &&
+                <td className="Divider"> </td>
+               }
                <ChatView messages={this.props.messages} thread={2} active_threads={this.props.active_threads} current_thread={this.props.current_thread}/>
                </tr>
             </tbody>
