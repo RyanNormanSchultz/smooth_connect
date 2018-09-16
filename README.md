@@ -19,11 +19,14 @@ This approach is sufficient for simple 1 on 1 conversations but breaks down in 2
 
 This issues crop up due to the asynchronous nature of text communication. Face-to-face communication is synchronous, we are limited by our limited short-term memory and attention. It's not efficient or effective to "switch threads" so we only talk about one thing at once. Text messaging is different because it is *asynchronous*. Due to the time delays in responses it doesn't make sense to only talk about 1 thing at once, so we talk about many different things.
 
-Smooth Connect offers a solution to this problem by building a framework that enables multiple "threads" to organically occur during a text conversation. Allowing to better organize semantics, and helping to alleviate the aforementioned problems. Things start simple, and threads are only spawned when required. Implementing this idea will result in easier, more natural, text communications. 
+Smooth Connect offers a solution to this problem by building a framework that enables multiple "threads" to organically occur during a text conversation. Allowing to better organize semantics, and helping to alleviate the aforementioned problems. Things start simple, and threads are only spawned when required. Implementing this idea will result in easier, more natural, text communications.
 
 Let's bring text messaging to the modern era.
 
 Ryan Schultz's submission for Hack the North (HTN) 2018.
+
+####Common Question: Don't slack "channels" already solve this? 
+I would disagree. Slack channels provide a *context* for conversations to occur, but they do not address problem 1) and 2) mentioned above. Whereas I believe Smooth Connect's dynamic threads within a conversation do.
 
 
 
