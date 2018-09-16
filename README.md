@@ -25,7 +25,7 @@ Let's bring text messaging to the modern era.
 
 Ryan Schultz's submission for Hack the North (HTN) 2018.
 
-####Common Question: Don't slack "channels" already solve this? 
+#### Common Question: Don't slack "channels" already solve this? 
 I would disagree. Slack channels provide a *context* for conversations to occur, but they do not address problem 1) and 2) mentioned above. Whereas I believe Smooth Connect's dynamic threads within a conversation do.
 
 
