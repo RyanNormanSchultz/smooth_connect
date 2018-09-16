@@ -15,6 +15,16 @@ class ChatMessage extends Component {
   }
 }
 
+class EmptyChatMessage extends Component {
+  render() {
+    return(
+        <tr>
+          <td className="Empty-message" > </td>
+        </tr>
+    );
+  }
+}
+
 class ChatView extends Component {
   render() {
     const rows = [];
@@ -28,6 +38,11 @@ class ChatView extends Component {
                   message={message.content}
                   type={message.type} 
                   key={message.content} />
+            );
+        } else {
+          rows.push(
+              <EmptyChatMessage
+                  key={message.thread + message.content}/>
             );
         }
       }

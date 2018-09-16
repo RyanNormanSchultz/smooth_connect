@@ -81,6 +81,18 @@ p {
   max-width:200px;
 }
 
+.Empty-message {
+  color: white;
+  position: relative;
+  height:46px;
+  padding: 0px;
+  font-size: 14px;
+  list-style: none;
+  max-width:200px;
+  float:right;
+  clear: both;
+}
+
 .input{
     height: 40px;
   width: 100%;
