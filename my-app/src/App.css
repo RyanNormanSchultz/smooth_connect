@@ -52,6 +52,7 @@ p {
   width: 200px;
     border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+    transition: all 0.1s ease;
 }
 .Self-message {
   background: rgba(50, 67, 89, 0.8);

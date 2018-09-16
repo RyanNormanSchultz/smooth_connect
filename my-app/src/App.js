@@ -80,7 +80,7 @@ class ThreadView extends Component {
 class InputChat extends Component {
   constructor(props){
     super(props);
-    this.state = {value: '', messages:props.chatHistory, thread: 0, active_threads: 0, person: 'self'};
+    this.state = {value: '', messages:props.chatHistory, thread: 0, active_threads: 0, person: 'self', count:0};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -103,11 +103,15 @@ class InputChat extends Component {
     if(regex_end_thread.test(this.state.value)){
       this.setState({active_threads: this.state.active_threads - 1});
     }
-
-    if(this.state.person === 'self'){ //just flip flop states for now
-      this.setState({person: 'friend'});
-    } else{
-      this.setState({person: 'self'});
+    if(this.state.count == 2){
+      this.setState({count: 0});
+      if(this.state.person === 'self'){ //just flip flop states for now
+        this.setState({person: 'friend'});
+      } else{
+        this.setState({person: 'self'});
+      }
+    } else {
+      this.setState({count: this.state.count+1});
     }
     const new_message = [{content:this.state.value, type:this.state.person, thread:thread, visible:1}];
     this.setState({
